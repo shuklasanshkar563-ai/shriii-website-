@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+
+{% block title %}Home — Dev sec studio{% endblock %}
+
+{% block content %}
+
+<style>
+    /* INTRO SHORT FEATURE SECTION */
+#intro-short {
+    background: linear-gradient(135deg, #001f29, #0b0b0b);
+    border-radius: 20px;
+    padding: 60px 40px; /* Increased padding for bigger section */
+    text-align: center;
+    margin: 50px auto;
+    max-width: 1000px;
+    box-shadow: 0 0 50px rgba(0, 234, 255, 0.2); /* Slightly stronger shadow */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+#intro-short:hover {
+    transform: translateY(-8px); /* Slightly more lift */
+    box-shadow: 0 0 80px rgba(0, 234, 255, 0.35); /* Stronger hover shadow */
+}
+
+#intro-short h2 {
+    font-size: 2.4rem; /* Increased font size for heading */
+    margin-bottom: 20px;
+    color: #00eaff;
+}
+
+#intro-short p {
+    font-size: 1.2rem; /* Slightly bigger paragraph */
+    color: #d0d0d0;
+    margin-bottom: 30px;
+    line-height: 1.6; /* Better readability */
+}
+
+#intro-short .hero-btn {
+    display: inline-block;
+    background-color: #00eaff;
+    color: #000;
+    padding: 16px 30px; /* Bigger button */
+    border-radius: 10px;
+    font-size: 1.1rem; /* Slightly bigger text */
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#intro-short .hero-btn:hover {
+    background-color: #00b8cc;
+    transform: scale(1.05); /* Slightly enlarges button on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #intro-short {
+        padding: 40px 20px;
+    }
+    #intro-short h2 {
+        font-size: 2rem;
+    }
+    #intro-short p {
+        font-size: 1.1rem;
+    }
+    #intro-short .hero-btn {
+        padding: 14px 25px;
+        font-size: 1rem;
+    }
+}
+
+
+/* ABOUT ME SHORT FEATURE SECTION */
+#about-short {
+    background: linear-gradient(135deg, #001f29, #0b0b0b);
+    border-radius: 20px;
+    padding: 50px 30px;
+    text-align: center;
+    margin: 60px auto;
+    max-width: 900px;
+    box-shadow: 0 0 40px rgba(0, 234, 255, 0.15);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+#about-short:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 60px rgba(0, 234, 255, 0.3);
+}
+
+#about-short .icon {
+    font-size: 3rem;
+    color: #00eaff;
+    margin-bottom: 15px;
+}
+
+#about-short h2 {
+    margin-bottom: 15px;
+}
+
+#about-short p {
+    font-size: 1.05rem;
+    color: #d0d0d0;
+    margin-bottom: 25px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #intro-short, #about-short {
+        padding: 30px 20px;
+        margin: 30px 15px;
+    }
+
+    #intro-short h2 {
+        font-size: 1.5rem;
+    }
+
+    #about-short .icon {
+        font-size: 2.5rem;
+    }
+}
+/* Fade-in animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#intro-short {
+    animation: fadeInUp 1s ease forwards;
+}
+/* Scroll Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.hero-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,234,255,0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hero-btn:hover::after {
+    opacity: 1;
+}
+#about-short .icon {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+/* Container */
+.professional-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    color: #00e5ff;
+    margin: 20px 0;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+/* Animated underline */
+.professional-title::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #00e5ff, #007bff);
+    bottom: 0;
+    left: -100%;
+    transition: all 0.5s ease;
+}
+
+.professional-title:hover::after {
+    left: 0;
+}
+
+/* Text gradient animation (optional) */
+@keyframes gradientText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.professional-title.gradient {
+    background: linear-gradient(270deg, #00e5ff, #007bff, #00e5ff);
+    
+    -webkit-text-fill-color: transparent;
+    background-size: 400% 400%;
+    animation: gradientText 4s ease infinite;
+}
+
+
+
+
+</style>
+
+<!-- INTRO SHORT FEATURE SECTION -->
+<section id="intro-short">
+    <h2>Full-Stack Web Developer</h2>
+    <p>
+       <h1 class="animated-text"></h1>
+
+<script>
+const text = "I build modern websites that make your brand shine.";
+let i = 0;
+const speed = 50; // typing speed in ms
+
+function typeWriter() {
+    if (i < text.length) {
+        document.querySelector(".animated-text").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+    }
+}
+
+typeWriter();
+</script>
+
+<style>
+.animated-text {
+    font-size: clamp(1.2rem, 4vw, 2rem); /* responsive font size */
+    font-weight: bold;
+    color: #00eaff;
+    border-right: 2px solid #00eaff;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 95%; /* prevent overflow on small screens */
+    margin: 0 auto;
+    text-align: center; /* center for mobile */
+}
+
+.animated-text::after {
+    content: '';
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+
+/* Optional: adjust typing speed or spacing for very small screens */
+@media (max-width: 480px) {
+    .animated-text {
+        font-size: clamp(1rem, 5vw, 1.5rem);
+        border-right: 1px solid #00eaff;
+    }
+}
+</style>
+.
+    </p>
+    <a href="{{ url_for('services') }}" class="hero-btn">Start Your Project</a>
+</section>
+
+<!-- ABOUT ME SHORT FEATURE SECTION -->
+<section id="about-short">
+    <div class="icon">
+        <i class="fas fa-user-astronaut"></i>
+    </div>
+
+    <h2>About Me</h2>
+
+    <p>
+        Hi, I’m <strong>Shriii</strong> — "A creative Web Developer focused on crafting fast, modern, and visually impactful digital experiences that help brands thrive online."
+    </p>
+
+    <a href="{{ url_for('about') }}" class="hero-btn">Know More</a>
+</section>
+
+<section id="discovery-call">
+    <h2>Discovery Call</h2>
+    <p>
+        We start every project with a discovery call to understand your goals,
+        requirements, and vision. This helps us plan the perfect solution for your business.
+    </p>
+    <a href="{{ url_for('contact') }}" class="hero-btn">Book a Call</a>
+</section>
+
+<section id="proposal">
+    <h2>Proposal</h2>
+    <p>
+        After the discovery call, we prepare a detailed proposal outlining the scope,
+        timeline, and pricing. Transparency and clarity are our priorities.
+    </p>
+    <a href="{{ url_for('contact') }}" class="hero-btn">Get Your Proposal</a>
+
+    <!-- INTRO SHORT FEATURE SECTION
+<section id="intro-short">
+    <h2>Creative Web Developer & Graphic Designer</h2>
+    <p>
+        I design and develop modern, fast, and visually stunning websites and graphics
+        that help your brand stand out and grow online.
+    </p>
+    <a href="{{ url_for('services') }}" class="hero-btn">
+        <i class="fas fa-rocket" style="margin-right:8px;"></i>
+        Start Your Project
+    </a>
+    {% raw %}
+<script>
+const reveals = document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll", () => {
+    reveals.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (sectionTop < windowHeight - 100) {
+            section.classList.add("active");
+        }
+    });
+}); -->
+</script>
+{% endraw %}
+<section id="intro-short" class="reveal">
+<section id="about-short" class="reveal">
+<section id="discovery-call" class="reveal">
+<section id="proposal" class="reveal">
+
+
+</section>
+
+
+
+{% endblock %}

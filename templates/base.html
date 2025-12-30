@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        /* ===========================
+           BASE STYLES
+        =========================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* ===========================
+           CONTAINER
+        =========================== */
+        .navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+        /* ===========================
+           NAVBAR
+        =========================== */
+        .navbar {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar-brand {
+    order: 1;
+}
+
+.navbar-nav {
+    order: 2;
+    margin-left: 850px;
+}
+
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            color: #00eaff;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar-nav li {
+            margin-left: 25px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #ddd;
+            transition: 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #00eaff;
+        }
+
+        /* ===========================
+           SECTIONS
+        =========================== */
+        section {
+            padding: 60px 0;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: #00eaff;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 1rem;
+            color: #ccc;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        /* ===========================
+           BUTTONS
+        =========================== */
+        .hero-btn,
+        button {
+            display: inline-block;
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #000;
+            background: linear-gradient(135deg, #00eaff, #00ff9d);
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(0, 234, 255, 0.45);
+            transition: 0.35s;
+        }
+
+        .hero-btn:hover,
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 157, 0.75);
+        }
+
+        /* ===========================
+           FOOTER
+        =========================== */
+        footer {
+            background-color: #000;
+            padding: 30px 0;
+            text-align: center;
+            color: #aaa;
+        }
+
+        footer .social-links a {
+            color: #00eaff;
+            margin: 0 10px;
+            font-size: 1.4rem;
+        }
+
+        /* ===========================
+           AI AGENT STYLES
+        =========================== */
+        #agent-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #00eaff, #00ff9d);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(0, 234, 255, 0.6);
+            z-index: 999;
+            animation: float 3s ease-in-out infinite, pulse 2s infinite;
+        }
+
+        #agent-box {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 300px;
+            background: #111;
+            border-radius: 15px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.35s ease;
+        }
+
+        #agent-box.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .agent-header {
+            background: #000;
+            color: #00eaff;
+            padding: 12px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .agent-body {
+            padding: 15px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .agent-body p {
+            animation: pop 0.3s ease-out;
+        }
+
+        .agent-actions {
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .agent-actions button {
+            font-size: 13px;
+            padding: 8px;
+            flex: 1;
+        }
+
+        /* ===========================
+           AI SPEAKING ANIMATION
+        =========================== */
+        .agent-speaking::after {
+            content: "";
+            display: block;
+            height: 4px;
+            width: 100%;
+            margin-top: 8px;
+            background: linear-gradient(90deg, #00eaff, #00ff9d);
+            animation: wave 1s infinite linear;
+        }
+
+        @keyframes wave {
+            0% { background-position: 0%; }
+            100% { background-position: 200%; }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px rgba(0,234,255,0.6); }
+            50% { box-shadow: 0 0 40px rgba(0,255,157,0.9); }
+            100% { box-shadow: 0 0 20px rgba(0,234,255,0.6); }
+        }
+
+        /* ===========================
+           MOBILE RESPONSIVE AI
+        =========================== */
+        @media (max-width: 480px) {
+            #agent-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            #agent-box {
+                width: calc(100% - 30px);
+                right: 15px;
+                bottom: 85px;
+                border-radius: 12px;
+            }
+
+            .agent-actions button {
+                flex: 1 1 100%;
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+        .chat-buttons a {
+    justify-content: center;
+    text-align: center;
+}
+/* ===========================
+   CHAT BUTTONS – RESPONSIVE + BOTTOM SHEET
+=========================== */
+
+@media (max-width: 480px) {
+
+    .chat-buttons {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 15px;
+        background: #0d0d0d;
+        box-shadow: 0 -10px 30px rgba(0,0,0,0.7);
+        border-radius: 16px 16px 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 998;
+
+        animation: slideUp 0.35s ease;
+    }
+
+    .chat-buttons a {
+        width: 100%;
+        justify-content: center;
+        font-size: 1rem;
+        padding: 15px;
+        border-radius: 12px;
+        margin: 0;
+    }
+}
+
+/* Slide animation */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+/* ===========================
+   VOICE AI CTA ANIMATION
+=========================== */
+
+.voice-active .agent-actions button {
+    animation: ctaPulse 1.5s infinite;
+}
+
+@keyframes ctaPulse {
+    0% {
+        box-shadow: 0 0 0 rgba(0,234,255,0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0,255,157,0.9);
+        transform: scale(1.03);
+    }
+    100% {
+        box-shadow: 0 0 0 rgba(0,234,255,0.4);
+        transform: scale(1);
+    }
+}
+/* Navbar brand */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+/* ROUND logo image */
+.nav-logo {
+    height: 48px;           /* desktop */
+    width: 48px;            /* same as height for perfect circle */
+    max-width: none;
+    object-fit: cover;      /* important for round crop */
+    border-radius: 50%;     /* makes it round */
+    border: 2px solid #fff; /* optional – looks premium */
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .nav-logo {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .nav-logo {
+        height: 34px;
+        width: 34px;
+    }
+}
+
+/* Logo + text alignment */
+.brand-flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Brand text */
+.brand-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+}
+.nav-logo {
+    box-shadow: 0 0 8px rgba(255,255,255,0.4);
+}
+/* ================= BACKGROUND LOGO WATERMARK ================= */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 600px;
+    height: 600px;
+
+    background: url("{{ url_for('static', filename='ss logo1.jpg') }}") no-repeat center;
+    background-size: contain;
+
+    opacity: 0.04; /* very subtle */
+    z-index: -1;   /* behind everything */
+    pointer-events: none;
+}
+@media (max-width: 768px) {
+    body::before {
+        width: 600px;
+        height: 600px;
+        opacity: 0.035;
+    }
+}
+
+@media (max-width: 480px) {
+    body::before {
+        width: 300px;
+        height: 300px;
+        opacity: 0.03;
+    }
+}
+
+
+
+
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dev sec studio{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+<a class="navbar-brand brand-flex" href="{{ url_for('index') }}">
+    <img src="{{ url_for('static', filename='ss logo1.jpg') }}" class="nav-logo">
+    <span class="brand-text">ss Web Studio</span>
+</a>
+
+        <ul class="navbar-nav">
+            <li><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+            <li><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+            <li><a class="nav-link" href="{{ url_for('services') }}">Services</a></li>
+            <li><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="main-content container">
+    {% block content %}{% endblock %}
+</div>
+
+<footer>
+    <p>© 2025 Designed & Developed by <strong>@Shriii Shukla</strong></p>
+    <div class="social-links">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/ss.web.studio05._?igsh=OTk0ZzIxa200aTNu"><i class="fab fa-instagram"></i></a>
+    </div>
+</footer>
+
+
+<div id="agent-btn">🤖</div>
+
+<div id="agent-box">
+    <div class="agent-header">
+        Buildify Assistant
+        <span id="agent-close" style="cursor:pointer;">✖</span>
+    </div>
+
+    <div class="agent-body" id="agent-body">
+        <p><strong>Hi 👋</strong><br>
+        I’m Buildify’s assistant.<br>
+        I can tell you about Shriii and help you book an appointment.</p>
+    </div>
+
+    <div class="agent-actions">
+        <button onclick="agentReply('about')">About Me</button>
+        <button onclick="agentReply('services')">Services</button>
+        <button onclick="agentReply('book')">Book Appointment</button>
+    </div>
+</div>
+
+
+<script>
+const agentBtn = document.getElementById("agent-btn");
+const agentBox = document.getElementById("agent-box");
+const agentClose = document.getElementById("agent-close");
+const agentBody = document.getElementById("agent-body");
+
+agentBtn.onclick = () => agentBox.classList.add("show");
+agentClose.onclick = () => agentBox.classList.remove("show");
+
+function speakText(text) {
+    window.speechSynthesis.cancel();
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
+    agentBody.classList.add("agent-speaking");
+    speech.onend = () => agentBody.classList.remove("agent-speaking");
+    window.speechSynthesis.speak(speech);
+}document.body.classList.add("voice-active");
+
+speech.onend = () => {
+    document.body.classList.remove("voice-active");
+};
+function speakText(text) {
+    window.speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
+    speech.rate = 1;
+    speech.pitch = 1;
+
+    // 🔊 Voice start → buttons animate
+    document.body.classList.add("voice-active");
+
+    speech.onend = () => {
+        // 🔇 Voice end → animation stop
+        document.body.classList.remove("voice-active");
+    };
+
+    window.speechSynthesis.speak(speech);
+}
+
+function agentReply(type) {
+    let msg = "";
+
+    if (type === "about") {
+        msg = "Shriii is a professional freelance web developer focused on modern, fast and secure websites.";
+    }
+    if (type === "services") {
+        msg = "Services include business websites, landing pages, portfolios and scalable web solutions.";
+    }
+    if (type === "book") {
+        speakText("Redirecting you to the contact page.");
+        window.location.href = "{{ url_for('contact') }}";
+        return;
+    }
+
+    agentBody.innerHTML += `<p>🤖 ${msg}</p>`;
+    speakText(msg);
+}
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,362 @@
+{% extends "base.html" %}
+
+{% block title %}Contact — Dev sec studio{% endblock %}
+
+{% block content %}
+
+<style>
+/* ---------- HERO ---------- */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #001f29, #0d0d0d);
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.hero p {
+    margin: 15px 0;
+    font-size: 1.2rem;
+    color: #dcdcdc;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #00eaff;
+    color: #000;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.hero-btn:hover {
+    background-color: #fff;
+}
+
+/* ---------- CONTACT FORM ---------- */
+.contact-form-box {
+    max-width: 500px;
+    margin: 60px auto;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 14px 15px;
+    background: transparent;
+    border: 1px solid #333;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    color: #aaa;
+    font-size: 0.9rem;
+    pointer-events: none;
+    transform: translateY(-50%);
+    background: #001f29;
+    padding: 0 6px;
+    transition: 0.3s ease;
+}
+
+.input-group textarea ~ label {
+    top: 18px;
+    transform: translateY(0);
+}
+
+.input-group input:focus ~ label,
+.input-group textarea:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label,
+.input-group textarea:not(:placeholder-shown) ~ label {
+    top: -8px;
+    font-size: 0.75rem;
+    color: #00eaff;
+}
+
+.full-btn {
+    width: 100%;
+}
+
+/* ---------- TOAST ---------- */
+/* .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #00eaff;
+    color: #000;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(0,234,255,0.6);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: 0.4s ease;
+    z-index: 9999;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+} */
+ /* Toast notification */
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #00eaff;
+    color: #000;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(0,234,255,0.5);
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Container for chat buttons */
+.chat-buttons {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Common button style */
+.chat-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 25px;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    min-width: 200px; /* Ensures buttons don't shrink too much */
+}
+
+/* WhatsApp Button */
+.chat-btn.whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+}
+
+/* Instagram Button */
+.chat-btn.instagram {
+    background: linear-gradient(135deg, #E1306C, #C13584);
+}
+
+/* Hover Animation */
+.chat-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-20deg);
+    transition: all 0.5s ease;
+}
+
+.chat-btn:hover::before {
+    left: 100%;
+}
+
+.chat-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Icon styling */
+.chat-btn i {
+    font-size: 20px;
+}
+
+/* ===== Responsive Media Queries ===== */
+@media screen and (max-width: 768px) {
+    .chat-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .chat-btn {
+        width: 80%; /* Fit nicely on mobile screens */
+        min-width: unset; /* Remove min-width for small screens */
+        font-size: 15px;
+        padding: 10px 20px;
+    }
+
+    .chat-btn i {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .chat-btn {
+        width: 90%;
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+
+    .chat-btn i {
+        font-size: 16px;
+    }
+}
+
+</style>
+
+<!-- CONTACT FORM
+<div class="contact-form-box">
+    <form id="contactForm">
+        <div class="input-group">
+            <input type="text" required placeholder=" ">
+            <label>Your Name</label>
+        </div>
+
+        <div class="input-group">
+            <input type="email" required placeholder=" ">
+            <label>Your Email</label>
+        </div>
+
+        <div class="input-group">
+            <textarea rows="4" required placeholder=" "></textarea>
+            <label>Project Details</label>
+        </div>
+
+        <button type="submit" class="hero-btn full-btn">
+            🚀 Send Request
+        </button>
+    </form>
+
+    <div id="toast" class="toast">
+        Message sent successfully! 🚀
+    </div>
+</div>
+
+<script>
+const form = document.getElementById("contactForm");
+const toast = document.getElementById("toast");
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        form.reset();
+    }, 3000);
+});
+</script> -->
+
+<!-- OFFBOARDING SECTION -->
+<section id="offboarding" style="padding:60px 20px; background:#0b0b0b; text-align:center;">
+    <div style="max-width:900px; margin:auto; background:linear-gradient(135deg,#001f29,#001a33);
+    padding:50px 30px; border-radius:20px; box-shadow:0 0 50px rgba(0,234,255,0.2);">
+        <h2 style="color:#00eaff;">Offboarding</h2>
+        <p style="color:#d0d0d0;">
+            After project completion, we provide all files, documentation, and guidance for a smooth transition.
+        </p>
+        <button class="hero-btn">Request Your Project Package</button>
+    </div>
+    <script>
+    // Select the button inside Offboarding section
+    const packageBtn = document.querySelector("#offboarding .hero-btn");
+
+    // Create toast div dynamically
+    const toast = document.createElement("div");
+    toast.id = "toast";
+    toast.innerHTML = `
+        ✅ You will receive your ZIP file soon!
+        <button id="toast-close">OK</button>
+    `;
+    document.body.appendChild(toast);
+
+    const toastClose = document.getElementById("toast-close");
+
+    // Function to show toast
+    packageBtn.addEventListener("click", () => {
+        toast.classList.add("show");
+
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 3000);
+    });
+
+    // Close toast manually
+    toastClose.addEventListener("click", () => {
+        toast.classList.remove("show");
+    });
+</script>
+
+</section>
+<div class="chat-buttons">
+
+    <!-- WhatsApp Chat -->
+    <a href="https://wa.me/7222939350?text=Hello%20I%20want%20to%20inquire%20about%20your%20services" 
+   target="_blank" class="chat-btn whatsapp">
+    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+</a>
+
+
+    <!-- Instagram DM -->
+    <a href="https://www.instagram.com/ss.web.studio05._?text=Hello%20I%20want%20to%20inquire%20about%20your%20services" target="_blank" class="chat-btn instagram">
+        <i class="fab fa-instagram"></i> Chat on Instagram
+    </a>
+
+</div>
+
+
+<!-- CONTACT INFO -->
+<section id="contact" style="padding:60px 20px; background:#0b0b0b; text-align:center;">
+    <div style="max-width:900px; margin:auto; background:linear-gradient(135deg,#001f29,#001a33);
+    padding:50px 30px; border-radius:20px; box-shadow:0 0 50px rgba(0,234,255,0.2);">
+        <h2 style="color:#00eaff;">Contact Me</h2>
+        <ul style="list-style:none; padding:0; color:#d0d0d0;">
+            <li>Email: ss web studio@gmail.com</li>
+            <li>Phone: +91 72******50</li>
+            <li> India</li>
+        </ul>
+    </div>
+</section>
+
+
+{% endblock %}
