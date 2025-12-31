@@ -709,230 +709,113 @@ body::before {
 </div>
 
 <!-- Resume -->
-<div class="resume-box animate-on-scroll">
-    <h4>📄 My Resume</h4>
-    <p>View or download my resume to know more about my skills and experience.</p>
-    <div class="resume-preview">
-        <iframe src="{{ url_for('static', filename='shriii Shukla resume.pdf') }}" title="Resume Preview"></iframe>
-    </div>
-    <div style="margin-top:20px;">
-        <a href="{{ url_for('static', filename='shriii Shukla resume.pdf') }}" target="_blank" class="resume-btn">👁 View Full Resume</a>
-        <a href="{{ url_for('static', filename='shriii Shukla resume.pdf') }}" download class="resume-btn">⬇ Download Resume</a>
-    </div>
+<div class="resume-preview desktop-only">
+    <iframe src="{{ url_for('static', filename='shriii_shukla_resume.pdf') }}"></iframe>
 </div>
-<!-- ================= SOCIAL CARDS ================= -->
-<div class="social-cards-container">
-    <a href="#" class="social-card github" onclick="showContactPopup(event)">
-        <img src="{{ url_for('static', filename='github.png') }}" alt="">
-        <span>GitHub</span>
-    </a>
-    <a href="#" class="social-card linkedin" onclick="showContactPopup(event)">
-        <img src="{{ url_for('static', filename='linkdin.png') }}" alt="">
-        <span>LinkedIn</span>
-    </a>
-    <a href="#" class="social-card upwork" onclick="showContactPopup(event)">
-        <img src="{{ url_for('static', filename='upwork.png') }}" alt="">
-        <span>Upwork</span>
+
+<div class="mobile-only">
+    <a href="{{ url_for('static', filename='shriii_shukla_resume.pdf') }}"
+       target="_blank" class="resume-btn">
+       📄 Open Resume
     </a>
 </div>
 
 <style>
-/* Container */
-.social-cards-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 30px;
-}
+    .desktop-only { display: block; }
+.mobile-only { display: none; }
 
-/* Card Style */
-.social-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(145deg, #111, #1a1a1a);
-    color: #fff;
-    text-decoration: none;
-    padding: 20px 25px;
-    border-radius: 16px;
-    width: 150px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Icon */
-.social-card img {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 12px;
-    transition: transform 0.3s ease;
-}
-
-/* Label */
-.social-card span {
-    font-weight: 600;
-    font-size: 1rem;
-    color: #00eaff;
-    transition: color 0.3s ease;
-}
-
-/* Hover effect */
-.social-card:hover {
-    transform: translateY(-6px) scale(1.05);
-    box-shadow: 0 15px 25px rgba(0,234,255,0.3), 0 0 15px rgba(0,234,255,0.1) inset;
-}
-
-.social-card:hover img {
-    transform: scale(1.2) rotate(5deg);
-}
-
-.social-card:hover span {
-    color: #fff;
-}
-
-/* Specific colors per platform */
-.github { background: linear-gradient(145deg, #333, #555); }
-.linkedin { background: linear-gradient(145deg, #0a66c2, #0056a3); }
-.upwork { background: linear-gradient(145deg, #6fda44, #4caf50); }
-
-/* Responsive */
-@media (max-width:768px){
-    .social-card {
-        width: 130px;
-        padding: 15px 20px;
-    }
-    .social-card img {
-        width: 35px;
-        height: 35px;
-    }
-    .social-card span {
-        font-size: 0.95rem;
-    }
-}
-
-@media (max-width:480px){
-    .social-cards-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .social-card {
-        width: 80%;
-        max-width: 250px;
-        margin-bottom: 15px;
-    }
-}
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease;
-}
-.animate-on-scroll.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-</style>
-
-<script>
-function showContactPopup(event) {
-    event.preventDefault();
-    alert("To view this profile, please contact me first.");
-}
-</script>
-
-
-<!-- Popup Modal -->
-<div id="contact-popup" style="
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #111;
-    color: #00eaff;
-    padding: 25px 30px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0,234,255,0.3);
-    display: none;
-    z-index: 1000;
-">
-     <p>
-            Due to client privacy and NDAs, many (premium & Enterprise website) projects are shared only with serious clients.
-            Please contact me to get full access to my professional work.
-        </p>
-        <a href="/contact" class="major-btn">Contact Now </a>
-        <a href="/about" class="major-btn">back</a>
-
-<style>
-/* Major Contact Button */
-.major-btn {
-    display: inline-block;
-    background-color: #ff4d4d; /* Red color */
-    color: #fff;
-    padding: 12px 30px;
-    font-weight: 600;
-    border-radius: 30px;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: all 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* Hover effect */
-.major-btn:hover {
-    background-color: #ff1a1a; /* Slightly darker red */
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(255,77,77,0.5);
-}
-
-/* Responsive adjustments */
-
-/* Tablets */
 @media (max-width: 768px) {
-    .major-btn {
-        padding: 10px 25px;
-        font-size: 0.95rem;
-    }
+    .desktop-only { display: none; }
+    .mobile-only { display: block; }
 }
 
-/* Mobile phones */
-@media (max-width: 480px) {
-    .major-btn {
-        padding: 8px 20px;
-        font-size: 0.9rem;
-        display: block;   /* Full width */
-        width: 100%;
-        text-align: center;
-        margin-bottom: 10px;
-    }
+</style>
+
+
+<!-- SOCIAL CARDS -->
+<div class="social-cards-container">
+    <a href="#" class="social-card github" onclick="openPopup(event)">GitHub</a>
+    <a href="#" class="social-card linkedin" onclick="openPopup(event)">LinkedIn</a>
+    <a href="#" class="social-card upwork" onclick="openPopup(event)">Upwork</a>
+</div>
+
+<!-- POPUP -->
+<div id="contact-popup">
+    <div class="popup-box">
+        <p>
+            Due to client privacy & NDA, premium projects are shared only
+            with serious clients. Please contact me to view full profiles.
+        </p>
+
+        <a href="/contact" class="major-btn">Contact Now</a>
+        <button class="major-btn" onclick="closePopup()">Close</button>
+    </div>
+</div>
+
+<style>
+/* SOCIAL */
+.social-cards-container{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    margin:30px 0;
+}
+.social-card{
+    padding:20px 30px;
+    border-radius:14px;
+    color:#fff;
+    text-decoration:none;
+    background:#222;
+}
+
+/* POPUP OVERLAY */
+#contact-popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    display:none;              /* ✅ ONLY NONE HERE */
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+}
+
+/* POPUP BOX */
+.popup-box{
+    background:#111;
+    color:#00eaff;
+    padding:22px;
+    border-radius:14px;
+    width:90%;
+    max-width:360px;
+    text-align:center;
+}
+
+/* BUTTON */
+.major-btn{
+    margin-top:12px;
+    padding:12px;
+    width:100%;
+    border-radius:30px;
+    border:none;
+    background:#ff4d4d;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
 }
 </style>
 
-    <!-- </div> style="
-        margin-top: 15px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 30px;
-        background: #00eaff;
-        color: #000;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Close</button> -->
-</div>
-
 <script>
-function showContactPopup(e){
-    e.preventDefault(); // Prevent link from opening
-    document.getElementById('contact-popup').style.display = 'block';
+function openPopup(e){
+    e.preventDefault();
+    document.getElementById("contact-popup").style.display = "flex";
 }
 
 function closePopup(){
-    document.getElementById('contact-popup').style.display = 'none';
+    document.getElementById("contact-popup").style.display = "none";
 }
 </script>
+
+
 
 
 
@@ -964,14 +847,19 @@ function closePopup(){
     </div>
 </section>
 
-<!-- NDA -->
-<section id="nda" class="animate-on-scroll nda-section">
-    <div class="container">
-        <h2>Confidentiality & NDA</h2>
-        <p>We prioritize your privacy and intellectual property. Before starting any project, we formalize a Non-Disclosure Agreement (NDA) to safeguard your ideas, strategies, and sensitive information, giving you complete peace of mind.</p>
-    </div>
-    
-</section>
+<style>
+/* Reduce font size in NDA section by 10% */
+#nda h2 {
+    font-size: 90%; /* 10% smaller than default */
+}
+
+#nda p {
+    font-size: 90%; /* 10% smaller than default */
+}
+</style>
+
+
+
 
 
 <!-- Scroll Animation JS -->
