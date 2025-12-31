@@ -728,16 +728,85 @@ body::before {
     .desktop-only { display: none; }
     .mobile-only { display: block; }
 }
+/* ================= SOCIAL CARDS ================= */
+.social-cards-container{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.social-card{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 20px;
+    border-radius:30px;
+    font-weight:600;
+    font-size:1rem;
+    color:#fff;
+    min-width:140px;
+    justify-content:center;
+    transition:transform .3s ease, box-shadow .3s ease;
+}
+
+/* Icons */
+.social-card i{
+    font-size:1.3rem;
+}
+
+/* Brand Colors */
+.social-card.github{
+    background:#111;
+}
+.social-card.linkedin{
+    background:#0077b5;
+}
+.social-card.upwork{
+    background:#14a800;
+}
+
+/* Hover (Desktop) */
+.social-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
+
+/* Mobile Friendly */
+@media(max-width:480px){
+    .social-card{
+        font-size:.95rem;
+        padding:12px 16px;
+        min-width:120px;
+    }
+    .social-card i{
+        font-size:1.2rem;
+    }
+}
 
 </style>
 
 
 <!-- SOCIAL CARDS -->
 <div class="social-cards-container">
-    <a href="#" class="social-card github" onclick="openPopup(event)">GitHub</a>
-    <a href="#" class="social-card linkedin" onclick="openPopup(event)">LinkedIn</a>
-    <a href="#" class="social-card upwork" onclick="openPopup(event)">Upwork</a>
+    <a href="#" class="social-card github" onclick="openPopup(event)">
+        <i class="fab fa-github"></i>
+        <span>GitHub</span>
+    </a>
+
+    <a href="#" class="social-card linkedin" onclick="openPopup(event)">
+        <i class="fab fa-linkedin-in"></i>
+        <span>LinkedIn</span>
+    </a>
+
+    <a href="#" class="social-card upwork" onclick="openPopup(event)">
+        <i class="fab fa-upwork"></i>
+        <span>Upwork</span>
+    </a>
 </div>
+
+
 
 <!-- POPUP -->
 <div id="contact-popup">
@@ -753,55 +822,133 @@ body::before {
 </div>
 
 <style>
-/* SOCIAL */
+/* ================= SOCIAL CARDS ================= */
 .social-cards-container{
     display:flex;
-    gap:20px;
+    gap:15px;
     justify-content:center;
-    margin:30px 0;
-}
-.social-card{
-    padding:20px 30px;
-    border-radius:14px;
-    color:#fff;
-    text-decoration:none;
-    background:#222;
+    flex-wrap:wrap;
+    margin:20px 0;
 }
 
-/* POPUP OVERLAY */
+.social-card{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 16px;
+    border-radius:30px;
+    font-weight:600;
+    font-size:0.95rem;
+    color:#fff;
+    text-decoration:none;
+    min-width:120px;
+    justify-content:center;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+/* Icons */
+.social-card i{
+    font-size:1.2rem;
+}
+
+/* Brand Colors */
+.social-card.github{ background:#111; }
+.social-card.linkedin{ background:#0077b5; }
+.social-card.upwork{ background:#14a800; }
+
+/* Hover */
+.social-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
+}
+
+/* Mobile */
+@media(max-width:480px){
+    .social-card{
+        font-size:.9rem;
+        padding:8px 12px;
+        min-width:100px;
+    }
+    .social-card i{ font-size:1rem; }
+}
+
+/* ================= POPUP ================= */
 #contact-popup{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,0.75);
-    display:none;              /* ✅ ONLY NONE HERE */
+    display:none;
     align-items:center;
     justify-content:center;
     z-index:9999;
 }
 
-/* POPUP BOX */
 .popup-box{
     background:#111;
     color:#00eaff;
-    padding:22px;
+    padding:20px;
     border-radius:14px;
     width:90%;
     max-width:360px;
     text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
-/* BUTTON */
+.popup-box p{
+    margin-bottom:14px;
+    font-size:0.95rem;
+    line-height:1.5;
+}
+
+/* ================= BUTTONS ================= */
 .major-btn{
-    margin-top:12px;
-    padding:12px;
+    margin-top:10px;
+    padding:8px 14px;
     width:100%;
-    border-radius:30px;
+    max-width:200px;
+    border-radius:22px;
     border:none;
     background:#ff4d4d;
     color:#fff;
+    font-size:0.9rem;
     font-weight:600;
     cursor:pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
 }
+
+.major-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(0,0,0,.4);
+}
+
+/* Responsive spacing */
+@media(max-width:480px){
+    .popup-box p{ font-size:0.9rem; }
+    .major-btn{ padding:7px 12px; font-size:0.85rem; max-width:160px; }
+}
+</style>
+
+<script>
+// Open popup (example for social card click)
+function openPopup(event){
+    event.preventDefault();
+    document.getElementById("contact-popup").style.display = "flex";
+}
+
+// Close popup
+function closePopup(){
+    document.getElementById("contact-popup").style.display = "none";
+}
+
+// Close popup on outside click
+document.getElementById("contact-popup").addEventListener("click", function(e){
+    if(e.target === this){
+        this.style.display = "none";
+    }
+});
+</script>
 </style>
 
 <script>

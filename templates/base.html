@@ -9,30 +9,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-    /* 🔒 STOP HORIZONTAL SCROLL COMPLETELY */
+/* 🔒 STOP HORIZONTAL SCROLL COMPLETELY */
 html, body {
     width: 100%;
     overflow-x: hidden !important;
 }
-/* ===== MOBILE SCROLL FIX (DO NOT TOUCH HTML) ===== */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden !important;
-}
-
-/* Kisi bhi element se scroll aa raha ho to force stop */
-* {
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-/* Extra safe for mobile */
-@media (max-width: 480px) {
-    body {
-        overflow-x: hidden !important;
-    }
-}
-
 
 /* ================= BASE ================= */
 *{
@@ -94,6 +75,8 @@ a{text-decoration:none}
     font-size:22px;
     color:#00eaff;
     cursor:pointer;
+    padding:8px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* ================= MOBILE NAV ================= */
@@ -250,51 +233,72 @@ footer a{
 </div>
 
 <script>
+/* ===== MOBILE NAV TOGGLE FIX ===== */
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    navMenu.classList.toggle("show");
+});
+
+// Close menu when clicking outside
+document.addEventListener("click", (e) => {
+    if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        navMenu.classList.remove("show");
+    }
+});
+
+// Close menu on link click (mobile UX)
+document.querySelectorAll(".navbar-nav a").forEach(link => {
+    link.addEventListener("click", () => {
+        navMenu.classList.remove("show");
+    });
+});
+
+/* ===== AI AGENT ===== */
 const agentBtn = document.getElementById("agent-btn");
 const agentBox = document.getElementById("agent-box");
 const agentClose = document.getElementById("agent-close");
 
-// Show/hide AI box
-agentBtn.onclick = () => agentBox.classList.add("show");
+agentBtn.onclick = () => agentBox.classList.toggle("show");
 agentClose.onclick = () => agentBox.classList.remove("show");
 
-// Speak function
 function speak(text, callback) {
     if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.onend = () => {
-            if (callback) callback();
-        };
+        utterance.onend = () => callback && callback();
         speechSynthesis.speak(utterance);
     } else {
-        console.log("Speech synthesis not supported");
-        if (callback) callback();
+        callback && callback();
     }
 }
 
-// Agent replies
 function agentReply(t){
     if(t==="about") {
-        const msg = "I am Buildify Assistant. I can help you!to explore our services.";
+        const msg = "“Hi! I’m ss Web studio's Assistant. I can tell you about ss Web studio's work, services, and how he helps brands succeed online.”";
         document.getElementById("agent-body").innerText = msg;
-        speak(msg); // speak immediately
-    } else if(t==="services") {
-        const msg = "Looking to grow online? I create websites that attract and engage visitors! explore our services.";
-        
+        speak(msg, () => {
+             window.location.href="{{ url_for('about') }}";
+            
+        });
+    } 
+    else if(t==="services") {
+        const msg = "I create modern websites that attract and engage visitors. I can help you explore our services.";
         document.getElementById("agent-body").innerText = msg;
-        speak(msg);
-    } else if(t==="book") {
+        speak(msg, () => {
+            window.location.href="{{ url_for('services') }}";
+        });
+    } 
+    else if(t==="book") {
         const msg = "Redirecting to the contact page.";
         document.getElementById("agent-body").innerText = msg;
-        // Wait for voice to finish before redirecting
         speak(msg, () => {
             window.location.href="{{ url_for('contact') }}";
         });
     }
 }
 </script>
-
-
 
 </body>
 </html>

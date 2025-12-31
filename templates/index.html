@@ -103,14 +103,99 @@ section:hover {
         font-size: 2.5rem;
     }
 }
+section {
+    padding: 40px 18px;
+    margin: 30px 12px;
+    border-radius: 18px;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 31, 41, 0.92),
+        rgba(11, 11, 11, 0.92)
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 234, 255, 0.12);
+}
+
+/* Neon line fix for mobile */
+section::before {
+    width: 70%;
+    left: 15%;
+}
+section h2 {
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    line-height: 1.3;
+}
+
+section p {
+    font-size: clamp(0.95rem, 4.2vw, 1.05rem);
+    line-height: 1.7;
+}
+.hero-btn {
+    padding: 14px 26px;
+    font-size: 1rem;
+    min-width: 180px;
+    margin-top: 18px;
+}
+
+/* Remove hover-only effects on mobile */
+@media (hover: none) {
+    .hero-btn:hover {
+        transform: none;
+        box-shadow: 0 0 25px rgba(255, 43, 43, 0.4);
+    }
+}
+section {
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Reduce motion for mobile & accessibility */
+@media (max-width: 768px) {
+    section {
+        transition: all 0.6s ease;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    section {
+        transition: none;
+        transform: none;
+        opacity: 1;
+    }
+}
+@media (max-width: 768px) {
+    body::after {
+        display: none;
+    }
+}
+
 </style>
 
 <!-- ================= INTRO SHORT FEATURE ================= -->
 <section id="intro-short">
+    <div class="icon">
+        <i class="fas fa-code"></i>
+    </div>
+
     <h2>Full-Stack Web Developer with a Strong Focus on Frontend Engineering</h2>
-   
+
     <a href="{{ url_for('services') }}" class="hero-btn">Start Your Project</a>
 </section>
+<style>
+    #intro-short .icon {
+    font-size: 3rem;
+    color: #00eaff;
+    margin-bottom: 15px;
+    animation: float 3s ease-in-out infinite;
+}
+
+</style>
 
 <script>
 const text = "I build modern websites that make your brand shine.";
@@ -133,9 +218,22 @@ typeWriter();
     </p>
     <a href="{{ url_for('about') }}" class="hero-btn">Know More</a>
 </section>
+<style>
+    #discovery-call .icon {
+    font-size: 3rem;
+    color: #00eaff;
+    margin-bottom: 15px;
+    animation: float 3s ease-in-out infinite;
+}
+
+</style>
 
 <!-- ================= DISCOVERY CALL ================= -->
 <section id="discovery-call">
+    <div class="icon">
+        <i class="fas fa-phone-volume"></i>
+    </div>
+
     <h2>Discovery Call</h2>
     <p>
         We start every project with a discovery call to understand your goals,
@@ -144,8 +242,13 @@ typeWriter();
     <a href="{{ url_for('contact') }}" class="hero-btn">Book a Call</a>
 </section>
 
+
 <!-- ================= PROPOSAL ================= -->
 <section id="proposal">
+    <div class="icon">
+        <i class="fas fa-file-signature"></i>
+    </div>
+
     <h2>Proposal</h2>
     <p>
         After the discovery call, we prepare a detailed proposal outlining the scope,
@@ -153,6 +256,15 @@ typeWriter();
     </p>
     <a href="{{ url_for('contact') }}" class="hero-btn">Get Your Proposal</a>
 </section>
+<style>
+    #proposal .icon {
+    font-size: 3rem;
+    color: #00eaff;
+    margin-bottom: 15px;
+    animation: float 3s ease-in-out infinite;
+}
+
+</style>
 
 <!-- ================= SCROLL REVEAL ================= -->
 <script>
